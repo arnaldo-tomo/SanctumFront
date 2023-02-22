@@ -1,8 +1,14 @@
 import { NativeBaseProvider, Center, Box, Heading, VStack, FormControl, Input, Link, Button, Text, HStack } from 'native-base';
 import { Formik } from 'formik';
 import React from 'react';
-import { Axios } from 'axios';
-export default function Register() {
+import axios from 'axios';
+export default function Register({ navigation }) {
+
+    const formulario = {
+        name: '',
+        email: '',
+        password: '',
+    }
     return (
         <NativeBaseProvider>
             <Center w="100%">
@@ -18,28 +24,37 @@ export default function Register() {
                         Sign up to continue!
                     </Heading>
                     <Formik
-                        initialValues={{ email: '' }}
-                        onSubmit={values => console.log(values)}
+                        initialValues={formulario} onSubmit={values => axios.post("http://127.0.0.1:8000/api/register", values)
+                            .then((response) => response.json())
+                            .then((data) => {
+                                if (data.token) {
+                                    navigation.navigate('Home')
+                                }
+                            })
+                            .catch((error) => console.error(error))
+
+                        }
                     >
                         {({ handleChange, handleBlur, handleSubmit, values }) => (
                             <VStack space={3} mt="5">
                                 <FormControl>
+                                    <FormControl.Label>name</FormControl.Label>
+                                    <Input onChangeText={handleChange('name')}
+                                        onBlur={handleBlur('name')}
+                                        value={values.name} type="text" />
+                                </FormControl>
+                                <FormControl>
                                     <FormControl.Label>Email</FormControl.Label>
                                     <Input onChangeText={handleChange('email')}
                                         onBlur={handleBlur('email')}
-                                        value={values.email} type="password" />
+                                        value={values.email} type="email" />
                                 </FormControl>
-                                <FormControl>
-                                    <FormControl.Label>Password</FormControl.Label>
-                                    <Input onChangeText={handleChange('Password')}
-                                        onBlur={handleBlur('Password')}
-                                        value={values.Password} type="password" />
-                                </FormControl>
+
                                 <FormControl>
                                     <FormControl.Label>Confirm Password</FormControl.Label>
-                                    <Input onChangeText={handleChange('email')}
-                                        onBlur={handleBlur('email')}
-                                        value={values.email} type="password" />
+                                    <Input onChangeText={handleChange('password')}
+                                        onBlur={handleBlur('password')}
+                                        value={values.password} type="password" />
                                 </FormControl>
                                 <Button onPress={handleSubmit} mt="2" colorScheme="indigo">
                                     Sign up
@@ -50,6 +65,6 @@ export default function Register() {
 
                 </Box>
             </Center>
-        </NativeBaseProvider>
+        </NativeBaseProvider >
     )
 }
