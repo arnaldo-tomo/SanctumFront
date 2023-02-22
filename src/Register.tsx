@@ -23,17 +23,22 @@ export default function Register({ navigation }) {
                     }} fontWeight="medium" size="xs">
                         Sign up to continue!
                     </Heading>
-                    <Formik
-                        initialValues={formulario} onSubmit={values => axios.post("http://127.0.0.1:8000/api/register", values)
-                            .then((response) => response.json())
+                    <Formik initialValues={formulario} onSubmit={values =>
+                        axios.post("http://localhost:8000/api/register", values)
+                            .then((response) => response.data)
                             .then((data) => {
                                 if (data.token) {
-                                    navigation.navigate('Home')
+                                    // armazene o token no armazenamento local (local storage) ou async storage
+                                    // redirecione para a tela de perfil
+                                    navigation.navigate('Home', data);
+                                    console.log('Mateus 15.1', data)
+                                    localStorage.setItem('auth_token', data.token);
+                                    localStorage.setItem('auth_name', data.username);
                                 }
                             })
                             .catch((error) => console.error(error))
+                    }
 
-                        }
                     >
                         {({ handleChange, handleBlur, handleSubmit, values }) => (
                             <VStack space={3} mt="5">
