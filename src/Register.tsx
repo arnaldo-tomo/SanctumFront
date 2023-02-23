@@ -1,8 +1,12 @@
+
 import { NativeBaseProvider, Center, Box, Heading, VStack, FormControl, Input, Link, Button, Text, HStack } from 'native-base';
-import { Formik } from 'formik';
 import React from 'react';
+import { Formik } from 'formik';
 import axios from 'axios';
-export default function Register({ navigation }) {
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+export default function Register({ navigation }: { navigation: any }) {
+
 
     const formulario = {
         name: '',
@@ -28,12 +32,18 @@ export default function Register({ navigation }) {
                             .then((response) => response.data)
                             .then((data) => {
                                 if (data.token) {
+                                    const { token, message } = data;
                                     // armazene o token no armazenamento local (local storage) ou async storage
-                                    // redirecione para a tela de perfil
-                                    navigation.navigate('Home', data);
-                                    localStorage.setItem('auth_token', data.token);
-                                    localStorage.setItem('auth_name', data.username);
-                                    console.log('Mateus 15.1', auth_name)
+                                    // Armazena o token e o nome do usuário no AsyncStorage
+                                    AsyncStorage.setItem('auth_token', token);
+                                    AsyncStorage.setItem('message', message);
+                                    AsyncStorage.setItem('name', data.info.name);
+                                    AsyncStorage.setItem('email', data.info.email);
+                                    AsyncStorage.setItem('id', data.info);
+                                    //objeto armazenado,
+                                    AsyncStorage.setItem('user', JSON.stringify(data.info));
+                                    // redirecione para a tela de Home
+                                    navigation.navigate('Home');
                                 }
                             })
                             .catch((error) => console.error(error))
