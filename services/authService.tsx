@@ -2,10 +2,16 @@ import axios from 'axios';
 import Login from './../src/Login';
 import Register from './../src/Register';
 import Home from './../src/Home';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const getUserInfo = async () => {
-    const response = await axios.get('http://127.0.0.1:8000//api/user');
-    return response.data;
+
+const Sair = ({ navigation }: { navigation: any }) => {
+    AsyncStorage.removeItem('id');
+    AsyncStorage.removeItem('token');
+    AsyncStorage.removeItem('name');
+    AsyncStorage.removeItem('email');
+    AsyncStorage.removeItem('user');
+    navigation.navigate('Login')
 }
 
-export { Login, Register, Home, getUserInfo };
+export { Login, Register, Home, Sair };
