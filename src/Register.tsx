@@ -31,9 +31,9 @@ export default function Register({ navigation }) {
                                     // armazene o token no armazenamento local (local storage) ou async storage
                                     // redirecione para a tela de perfil
                                     navigation.navigate('Home', data);
-                                    console.log('Mateus 15.1', data)
                                     localStorage.setItem('auth_token', data.token);
                                     localStorage.setItem('auth_name', data.username);
+                                    console.log('Mateus 15.1', auth_name)
                                 }
                             })
                             .catch((error) => console.error(error))
