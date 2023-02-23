@@ -1,44 +1,32 @@
-import { NativeBaseProvider, Box, Text } from 'native-base';
+import { NativeBaseProvider, Box, Text, Button } from 'native-base';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { getUserInfo } from '../services/authService';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Login from './Login';
+import { Sair } from '../services/authService';
 
-function Home({ route }) {
-    const [user, setUser] = useState();
-    const [auth_name] = route.params;
+
+function Home({ navigation }: { navigation: any }) {
+    const [data, setData] = useState();
 
     useEffect(() => {
 
-        const fetchUser = async () => {
-            try {
-                const token = await AsyncStorage.getItem('token');
-                const response = await fetch('http://127.0.0.1:8000/api/user', {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
-                const data = await response.json();
-                setUser(data);
-
-            } catch (error) {
-                console.error(error);
-            }
+        const fetchUserData = async () => {
+            const Data = await AsyncStorage.getItem('name');
+            setData(Data);
         };
-
-        fetchUser();
-
+        fetchUserData();
     }, []);
+
+
+
+
+
     return (
         <NativeBaseProvider>
-            <Box>{user ? (
-                <>
-                    <Text>Bem-vindo, {user.name}!</Text>
-                    <Text>Email: {user.email}</Text>
-                </>
-            ) : (
-                <Text>Carregando informações do usuário...</Text>
-            )}</Box>
+
+            <Text>Carregando informações do usuário.2..{data}</Text>
+            <Button onPress={() => Sair}>LogoutScreen</Button>
         </NativeBaseProvider>
     )
 }
