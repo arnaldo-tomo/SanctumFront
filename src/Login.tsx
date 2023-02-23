@@ -1,8 +1,14 @@
 import { NativeBaseProvider, Center, Box, Heading, VStack, FormControl, Input, Link, Button, Text, HStack } from 'native-base';
 import React from 'react';
-
+import { Formik } from 'formik';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { TouchableOpacity } from 'react-native';
-export default function Login({ navigation }) {
+export default function Login({ navigation }: { navigation: any }) {
+    const formulario = {
+        email: '',
+        password: '',
+    }
     return (
         <NativeBaseProvider>
             <Center w="100%">
@@ -17,46 +23,63 @@ export default function Login({ navigation }) {
                     }} color="coolGray.600" fontWeight="medium" size="xs">
                         Sign in to continue!
                     </Heading>
+                    <Formik
+                        initialValues={formulario} onSubmit={values =>
+                            axios.post("http://localhost:8000/api/logiiin", values)
+                                .then((response) => response.data)
+                                .then((data) => {
+                                    if (data.token) {
+                                        AsyncStorage.setItem('id', data.user.id);
+                                        AsyncStorage.setItem('name', data.user.name);
+                                        AsyncStorage.setItem('email', data.user.email);
+                                        AsyncStorage.setItem('token', data.token);
+                                        navigation.navigate('Home');
+                                    }
+                                })
+                                .catch((error) => console.error(error.message))
+                        }
+                    >
+                        {({ handleChange, handleBlur, handleSubmit, values }) => (
+                            <VStack space={3} mt="5">
 
-                    <VStack space={3} mt="5">
-                        <FormControl>
-                            <FormControl.Label>Email ID</FormControl.Label>
-                            <Input />
-                        </FormControl>
-                        <FormControl>
-                            <FormControl.Label>Password</FormControl.Label>
-                            <Input type="password" />
-                            <Link _text={{
-                                fontSize: "xs",
-                                fontWeight: "500",
-                                color: "indigo.500"
-                            }} alignSelf="flex-end" mt="1">
-                                Forget Password?
-                            </Link>
-                        </FormControl>
-                        <Button mt="2" colorScheme="indigo">
-                            Sign in
-                        </Button>
-                        <TouchableOpacity
-                            onPress={() => navigation.navigate('Register')}
-                        >
+                                <FormControl>
+                                    <FormControl.Label>Email</FormControl.Label>
+                                    <Input onChangeText={handleChange('email')}
+                                        onBlur={handleBlur('email')}
+                                        value={values.email} type="email" />
+                                </FormControl>
 
-                            <HStack mt="6" justifyContent="center">
-                                <Text fontSize="sm" color="coolGray.600" _dark={{
-                                    color: "warmGray.200"
-                                }}>
-                                    I'm a new user.{"Register"}
-                                </Text>
-                                <Link _text={{
-                                    color: "indigo.500",
-                                    fontWeight: "medium",
-                                    fontSize: "sm"
-                                }} >
-                                    Sign Up
-                                </Link>
-                            </HStack>
-                        </TouchableOpacity>
-                    </VStack>
+                                <FormControl>
+                                    <FormControl.Label>Password</FormControl.Label>
+                                    <Input onChangeText={handleChange('password')}
+                                        onBlur={handleBlur('password')}
+                                        value={values.password} type="password" />
+                                    <Link _text={{ fontSize: "xs", fontWeight: "500", color: "indigo.500" }} alignSelf="flex-end" mt="1">
+                                        Forget Password?
+                                    </Link>
+                                </FormControl>
+
+                                <Button onPress={handleSubmit} mt="2" colorScheme="indigo">  Sign in </Button>
+
+                                <TouchableOpacity onPress={() => navigation.navigate('Register')}  >
+                                    <HStack mt="6" justifyContent="center">
+                                        <Text fontSize="sm" color="coolGray.600" _dark={{
+                                            color: "warmGray.200"
+                                        }}>
+                                            I'm a new user.{"Register"}
+                                        </Text>
+                                        <Link _text={{
+                                            color: "indigo.500",
+                                            fontWeight: "medium",
+                                            fontSize: "sm"
+                                        }} >
+                                            Sign Up
+                                        </Link>
+                                    </HStack>
+                                </TouchableOpacity>
+                            </VStack>
+                        )}
+                    </Formik>
                 </Box>
             </Center>
         </NativeBaseProvider >
