@@ -4,14 +4,15 @@ import React, { useState, useEffect } from 'react';
 import { getUserInfo } from '../services/authService';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-function Home() {
-
-    c const [user, setUser] = useState(null);
+function Home({ route }) {
+    const [user, setUser] = useState();
+    const [auth_name] = route.params;
 
     useEffect(() => {
+
         const fetchUser = async () => {
             try {
-                const token = await AsyncStorage.getItem('authToken');
+                const token = await AsyncStorage.getItem('token');
                 const response = await fetch('http://127.0.0.1:8000/api/user', {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -19,12 +20,14 @@ function Home() {
                 });
                 const data = await response.json();
                 setUser(data);
+
             } catch (error) {
                 console.error(error);
             }
         };
 
         fetchUser();
+
     }, []);
     return (
         <NativeBaseProvider>
