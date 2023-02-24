@@ -1,28 +1,61 @@
-import { NativeBaseProvider, Center, Box, Heading, VStack, FormControl, Input, Link, Button, Text, HStack } from 'native-base';
-import React from 'react';
+import { NativeBaseProvider, Center, Box, Heading, VStack, FormControl, Input, Alert, Collapse, Link, Button, Text, HStack, IconButton } from 'native-base';
+import React, { useState } from 'react';
 import { Formik } from 'formik';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 export default function Login({ navigation }: { navigation: any }) {
     const formulario = {
         email: '',
         password: '',
     }
+    const [show, setShow] = React.useState(false);
+    const [sms, setSMS] = useState();
     return (
-        <NativeBaseProvider>
+        <NativeBaseProvider bgColor={'white'}>
             <Center w="100%">
-                <Box safeArea p="2" py="8" w="90%" maxW="290">
+                <Box safeArea p="2" py="8" w="100%" maxW="290">
                     <Heading size="lg" fontWeight="600" color="coolGray.800" _dark={{
                         color: "warmGray.50"
                     }}>
                         Welcome
                     </Heading>
-                    <Heading mt="1" _dark={{
+                    <Heading mt="2" _dark={{
                         color: "warmGray.200"
                     }} color="coolGray.600" fontWeight="medium" size="xs">
                         Sign in to continue!
                     </Heading>
+
+
+                    <Box w="100%" paddingTop={4} alignItems="center">
+                        <Collapse isOpen={show}>
+                            <Alert maxW="400" status="error">
+                                <VStack space={1} flexShrink={1} w="100%">
+                                    <HStack flexShrink={1} space={2} alignItems="center" justifyContent="space-between">
+                                        <HStack flexShrink={1} space={2} alignItems="center">
+                                            <Alert.Icon />
+                                            <Text fontSize="md" fontWeight="medium" _dark={{
+                                                color: "coolGray.800"
+                                            }}>
+                                                Credenciais inválidas!
+                                            </Text>
+                                        </HStack>
+
+                                    </HStack>
+                                    <Box pl="6" _dark={{
+                                        _text: {
+                                            color: "coolGray.600"
+                                        }
+                                    }}>
+                                        {sms ? <Text>{sms}</Text> : null}
+                                    </Box>
+                                </VStack>
+                            </Alert>
+                        </Collapse>
+                    </Box>
+
+
                     <Formik
                         initialValues={formulario} onSubmit={values =>
                             axios.post("http://localhost:8000/api/logiiin", values)
@@ -36,7 +69,11 @@ export default function Login({ navigation }: { navigation: any }) {
                                         navigation.navigate('Home');
                                     }
                                 })
-                                .catch((error) => console.error(error.message))
+                                .catch((error) => {
+                                    setShow(true);
+                                    setSMS(error.message);
+                                }
+                                )
                         }
                     >
                         {({ handleChange, handleBlur, handleSubmit, values }) => (
@@ -46,7 +83,7 @@ export default function Login({ navigation }: { navigation: any }) {
                                     <FormControl.Label>Email</FormControl.Label>
                                     <Input onChangeText={handleChange('email')}
                                         onBlur={handleBlur('email')}
-                                        value={values.email} type="email" />
+                                        value={values.email} type="email" borderRadius={6} />
                                 </FormControl>
 
                                 <FormControl>
