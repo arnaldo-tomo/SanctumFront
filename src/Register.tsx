@@ -4,6 +4,7 @@ import React from 'react';
 import { Formik } from 'formik';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Spinne } from '../services/authService';
 
 export default function Register({ navigation }: { navigation: any }) {
 
