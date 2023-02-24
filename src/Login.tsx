@@ -1,10 +1,12 @@
-import { NativeBaseProvider, Center, Box, Heading, VStack, FormControl, Input, Alert, Collapse, Link, Button, Text, HStack, IconButton } from 'native-base';
+import { NativeBaseProvider, Center, Box, Spinner, Heading, VStack, FormControl, Input, Alert, Collapse, Link, Button, Text, HStack, IconButton } from 'native-base';
 import React, { useState } from 'react';
 import { Formik } from 'formik';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { Spinne } from '../services/authService';
+
 export default function Login({ navigation }: { navigation: any }) {
     const formulario = {
         email: '',
@@ -26,7 +28,6 @@ export default function Login({ navigation }: { navigation: any }) {
                     }} color="coolGray.600" fontWeight="medium" size="xs">
                         Sign in to continue!
                     </Heading>
-
 
                     <Box w="100%" paddingTop={4} alignItems="center">
                         <Collapse isOpen={show}>
