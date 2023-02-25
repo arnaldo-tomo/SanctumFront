@@ -5,8 +5,6 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { Spinne } from '../services/authService';
-
 export default function Login({ navigation }: { navigation: any }) {
     const formulario = {
         email: '',
