@@ -1,32 +1,37 @@
-import { NativeBaseProvider, Spacer, Heading, Box, Text, Button, StatusBar, HStack, Avatar, IconButton, Center, VStack, FlatList } from 'native-base';
+import {
+    NativeBaseProvider, Spacer, Heading, Box, Button, StatusBar, HStack, Image, Avatar, AspectRatio,
+    IconButton, Center, VStack, FlatList, ScrollView
+} from 'native-base';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { authService } from '../services/authService';
-import { Dimensions, TouchableOpacity, View } from 'react-native';
+import { Dimensions, TouchableOpacity, View, Text, ImageBackground, ImageBackgroundComponent, ImageBackgroundBase } from 'react-native';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import { MaterialIcons, Ionicons, Entypo } from '@expo/vector-icons';
+import { blue } from '@nextui-org/react';
+
 
 function Home({ navigation }) {
+    const daysOfWeek = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+    const currentDate = new Date();
+    const currentDayOfWeek = daysOfWeek[currentDate.getDay()];
+    const currentDae = new Date().toLocaleDateString();
 
     const { Spinne, Sair, Sessao } = authService()
-    const [data1, setData] = useState();
+    const [usuario, setnome] = useState();
+    const dia = currentDayOfWeek;
+    const semana = currentDae;
 
     useEffect(() => {
         const fetchUserData = async () => {
-            const Data = await AsyncStorage.getItem('name');
-
+            const Datae = await AsyncStorage.getItem('name');
+            setnome(Datae);
         };
         fetchUserData();
     })
 
     const data = [{
-        id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-        fullName: "Aafreen Khan",
-        timeStamp: "12:47 PM",
-        recentText: "Good Day!",
-        avatarUrl: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-    }, {
         id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
         fullName: "Aafreen Khan",
         timeStamp: "12:47 PM",
@@ -442,42 +447,31 @@ function Home({ navigation }) {
         avatarUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBwgu1A5zgPSvfE83nurkuzNEoXs9DMNr8Ww&usqp=CAU"
     }];
 
+
+
     return (
-        <NativeBaseProvider>
-            <Box bgColor={'white'} px={4} >
-                <Heading fontSize="xl" p="4" pb="3">
-                    Inbox
-                </Heading>
-                <FlatList data={data} renderItem={({
-                    item
-                }) => <Box borderBottomWidth="1" _dark={{
-                    borderColor: "muted.50"
-                }} borderColor="muted.800" pl={["0", "4"]} pr={["0", "5"]} py="2">
-                        <HStack space={[2, 3]} justifyContent="space-between">
-                            <Avatar size="48px" source={{
-                                uri: item.avatarUrl
-                            }} />
-                            <VStack>
-                                <Text _dark={{
-                                    color: "warmGray.50"
-                                }} color="coolGray.800" bold>
-                                    {item.fullName}
-                                </Text>
-                                <Text color="coolGray.600" _dark={{
-                                    color: "warmGray.200"
-                                }}>
-                                    {item.recentText}
-                                </Text>
-                            </VStack>
-                            <Spacer />
-                            <Text fontSize="xs" _dark={{
-                                color: "warmGray.50"
-                            }} color="coolGray.800" alignSelf="flex-start">
-                                {item.timeStamp}
-                            </Text>
-                        </HStack>
-                    </Box>} keyExtractor={item => item.id} />
-            </Box>
+        <NativeBaseProvider >
+            <AspectRatio w="100%" ratio={16 / 10}>
+                <Image source={{ uri: require('./image/dia.jpg') }} alt="image" borderBottomRadius={4} />
+            </AspectRatio>
+            <Heading fontWeight={'medium'} fontSize={40} style={{ position: 'absolute', top: 158, left: 10, color: 'white' }}>{dia}</Heading>
+            <Heading fontWeight={'thin'} fontSize={20} style={{ position: 'absolute', top: 200, left: 10, color: 'white' }}>{semana}</Heading>
+            <Heading fontWeight={'thin'} fontSize={20} style={{ position: 'absolute', top: 20, left: 10, color: 'white' }}>{usuario}</Heading>
+
+            <ScrollView>
+                <HStack bgColor={'white'}>
+                    <FlatList showsHorizontalScrollIndicator={false} shadow="2" pl="4" data={data} renderItem={({ item }) =>
+                        <Box borderBottomWidth="1" _dark={{ borderColor: "muted.50" }} borderColor="muted.800" pl={["0", "4"]} pr={["0", "5"]} py="2">
+                            <HStack space={[2, 3]} justifyContent="space-between">
+                                <Avatar size="50px" source={{ uri: item.avatarUrl }} />
+                                <Spacer />
+                            </HStack>
+                        </Box>
+                    } keyExtractor={item => item.id} />
+                </HStack>
+            </ScrollView>
+            <Ionicons name='add' color={'blue'} style={{ position: 'absolute', bottom: 20, left: 10, }} size={50} />
+
         </NativeBaseProvider>
     )
 }
