@@ -10,21 +10,21 @@ import { authService } from '../services/authService';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 const Stack = createStackNavigator();
 const Stacks = () => {
-    const { Sair, Sessao } = authService()
-    console.log('Peimro', Sessao())
+    const { Sair } = authService()
+    console.log('Peimro')
     return (
         <NavigationContainer>
             <Stack.Navigator>
-                <Stack.Screen name="Login" component={Login} options={{ headerShown: false, }} />
                 <Stack.Screen name="Home" component={Home} options={{
-                    headerLeft={{HeaderBackButtonProps} }ull, headerTransparent: true, headerMode: 'float', title: '', headerTintColor: 'white',
+                    headerLeft: null, headerTransparent: true, headerMode: 'float', title: '', headerTintColor: 'white',
 
                     headerRight: () => (
-                <TouchableOpacity onPress={Sair} style={{ marginRight: 15 }} >
-                    <Ionicons name='power' color={'white'} size={24} />
-                </TouchableOpacity>)
+                        <TouchableOpacity onPress={Sair} style={{ marginRight: 15 }} >
+                            <Ionicons name='power' color={'white'} size={24} />
+                        </TouchableOpacity>)
 
                 }} />
+                <Stack.Screen name="Login" component={Login} options={{ headerShown: false, }} />
                 <Stack.Screen name="Register" component={Register} />
             </Stack.Navigator>
         </NavigationContainer>
