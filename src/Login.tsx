@@ -15,9 +15,9 @@ export default function Login({ navigation }: { navigation: any }) {
     const [show, setShow] = React.useState(false);
     const [sms, setSMS] = useState();
     return (
-        <NativeBaseProvider bgColor={'white'}>
-            <Center w="100%">
-                <Box safeArea p="2" py="8" w="100%" maxW="290">
+        <NativeBaseProvider>
+            <Center flex={1} w="100%" bgColor={'white'}>
+                <Box safeArea p="2" w="100%" maxW="290">
                     <Heading size="lg" fontWeight="600" color="coolGray.800" _dark={{
                         color: "warmGray.50"
                     }}>
