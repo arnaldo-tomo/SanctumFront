@@ -1,6 +1,6 @@
 import {
     NativeBaseProvider, Spacer, Heading, Box, Button, StatusBar, HStack, Image, Avatar, AspectRatio,
-    IconButton, Center, VStack, FlatList, ScrollView
+    IconButton, Center, VStack, FlatList, ScrollView, Icon, Fab
 } from 'native-base';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
@@ -8,28 +8,25 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { authService } from '../services/authService';
 import { Dimensions, TouchableOpacity, View, Text, ImageBackground, ImageBackgroundComponent, ImageBackgroundBase } from 'react-native';
 import { SwipeListView } from 'react-native-swipe-list-view';
-import { MaterialIcons, Ionicons, Entypo } from '@expo/vector-icons';
-import { blue } from '@nextui-org/react';
+import { MaterialIcons, Ionicons, Entypo, AntDesign } from '@expo/vector-icons';
 
-
-function Home({ navigation }) {
+function Home() {
     const daysOfWeek = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
     const currentDate = new Date();
     const currentDayOfWeek = daysOfWeek[currentDate.getDay()];
     const currentDae = new Date().toLocaleDateString();
 
-    const { Spinne, Sair, Sessao } = authService()
     const [usuario, setnome] = useState();
     const dia = currentDayOfWeek;
     const semana = currentDae;
 
     useEffect(() => {
         const fetchUserData = async () => {
-            const Datae = await AsyncStorage.getItem('name');
-            setnome(Datae);
+            const info = await AsyncStorage.getItem('name');
+            setnome(info);
         };
         fetchUserData();
-    })
+    }, [])
 
     const data = [{
         id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
@@ -451,7 +448,7 @@ function Home({ navigation }) {
 
     return (
         <NativeBaseProvider >
-            <AspectRatio w="100%" ratio={16 / 10}>
+            <AspectRatio w="100%" ratio={17 / 11}>
                 <Image source={{ uri: require('./image/dia.jpg') }} alt="image" borderBottomRadius={4} />
             </AspectRatio>
             <Heading fontWeight={'medium'} fontSize={40} style={{ position: 'absolute', top: 158, left: 10, color: 'white' }}>{dia}</Heading>
@@ -460,18 +457,29 @@ function Home({ navigation }) {
 
             <ScrollView>
                 <HStack bgColor={'white'}>
-                    <FlatList showsHorizontalScrollIndicator={false} shadow="2" pl="4" data={data} renderItem={({ item }) =>
-                        <Box borderBottomWidth="1" _dark={{ borderColor: "muted.50" }} borderColor="muted.800" pl={["0", "4"]} pr={["0", "5"]} py="2">
-                            <HStack space={[2, 3]} justifyContent="space-between">
-                                <Avatar size="50px" source={{ uri: item.avatarUrl }} />
-                                <Spacer />
+                    <FlatList showsHorizontalScrollIndicator={false} shadow="2" px={4} data={data} renderItem={({ item }) =>
+
+                        <Box borderBottomWidth="1" _dark={{ borderColor: "muted.50" }} borderColor="muted.800" pl={["0", "0"]} pr={["0", "0"]} py="2">
+                            <HStack shadow={6} space={[2, 2]} justifyContent="space-between">
+                                {/* <Avatar size="50px" source={{ uri: item.avatarUrl }} /> */}
+                                <Heading fontWeight={'medium'} fontSize={30} >Criar nova agenda</Heading>
                             </HStack>
                         </Box>
+
                     } keyExtractor={item => item.id} />
                 </HStack>
             </ScrollView>
-            <Ionicons name='add' color={'blue'} style={{ position: 'absolute', bottom: 20, left: 10, }} size={50} />
+            <TouchableOpacity>
+                <AspectRatio w="100%" bgColor={'white'} ratio={80 / 11}>
+                    <Box style={{ position: 'absolute', backgroundColor: 'white', bottom: 50, color: 'black' }}>
+                        <Ionicons name='add' size={50} />
 
+                    </Box>
+                </AspectRatio>
+                <Box position="absolute" bottom={4} left={50}>
+                    <Heading fontWeight={'medium'} fontSize={15} >Criar nova agenda</Heading>
+                </Box>
+            </TouchableOpacity>
         </NativeBaseProvider>
     )
 }
