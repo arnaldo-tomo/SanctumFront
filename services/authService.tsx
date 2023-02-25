@@ -35,12 +35,14 @@ const authService = () => {
 
 
     const Sessao = () => {
-        const [data, setData] = useState();
+        const [usuario, setData] = useState();
+        return usuario;
 
         useEffect(() => {
             const fetchUserData = async () => {
-                const Data = await AsyncStorage.getItem('name');
-                setData(Data);
+                const f = await AsyncStorage.getItem('name');
+                setData(f);
+                return usuario;
             };
             fetchUserData();
         })
