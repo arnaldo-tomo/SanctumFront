@@ -34,22 +34,9 @@ const authService = () => {
     }
 
 
-    const Sessao = () => {
-        const [usuario, setData] = useState();
-        return usuario;
 
-        useEffect(() => {
-            const fetchUserData = async () => {
-                const f = await AsyncStorage.getItem('name');
-                setData(f);
-                return usuario;
-            };
-            fetchUserData();
-        })
-
-    }
     return {
-        Spinne, Sair, Sessao
+        Spinne, Sair
     }
 }
 
