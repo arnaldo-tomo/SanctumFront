@@ -15,6 +15,7 @@ const Stacks = () => {
     return (
         <NavigationContainer>
             <Stack.Navigator>
+                <Stack.Screen name="Login" component={Login} options={{ headerShown: false, }} />
                 <Stack.Screen name="Home" component={Home} options={{
                     headerLeft: null, headerTransparent: true, headerMode: 'float', title: '', headerTintColor: 'white',
 
@@ -24,7 +25,6 @@ const Stacks = () => {
                         </TouchableOpacity>)
 
                 }} />
-                <Stack.Screen name="Login" component={Login} options={{ headerShown: false, }} />
                 <Stack.Screen name="Register" component={Register} />
             </Stack.Navigator>
         </NavigationContainer>
