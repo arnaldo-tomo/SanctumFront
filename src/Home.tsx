@@ -449,7 +449,7 @@ function Home() {
     return (
         <NativeBaseProvider >
             <AspectRatio w="100%" ratio={17 / 11}>
-                <Image source={{ uri: require('./image/dia.jpg') }} alt="image" borderBottomRadius={4} />
+                <Image source={{ uri: require('./image/noite.jpg') }} alt="image" borderBottomRadius={4} />
             </AspectRatio>
             <Heading fontWeight={'medium'} fontSize={40} style={{ position: 'absolute', top: 158, left: 10, color: 'white' }}>{dia}</Heading>
             <Heading fontWeight={'thin'} fontSize={20} style={{ position: 'absolute', top: 200, left: 10, color: 'white' }}>{semana}</Heading>
@@ -457,12 +457,16 @@ function Home() {
 
             <ScrollView>
                 <HStack bgColor={'white'}>
-                    <FlatList showsHorizontalScrollIndicator={false} shadow="2" px={4} data={data} renderItem={({ item }) =>
+                    <FlatList showsHorizontalScrollIndicator={false} shadow="2" px={2} data={data} renderItem={({ item }) =>
 
-                        <Box borderBottomWidth="1" _dark={{ borderColor: "muted.50" }} borderColor="muted.800" pl={["0", "0"]} pr={["0", "0"]} py="2">
-                            <HStack shadow={6} space={[2, 2]} justifyContent="space-between">
-                                {/* <Avatar size="50px" source={{ uri: item.avatarUrl }} /> */}
-                                <Heading fontWeight={'medium'} fontSize={30} >Criar nova agenda</Heading>
+                        <Box borderBottomWidth="1" pl={["0", "4"]} pr={["0", "4"]} py="2">
+                            <HStack shadow={2} space={[2, 2]} justifyContent="space-between" height={50} borderRadius={4}>
+                                <Avatar size="30px" source={{ uri: item.avatarUrl }} />
+                                <Heading fontWeight={'medium'} fontSize={25} px={2} >Titulo da tarefa</Heading>
+                                <Spacer />
+                                <Heading fontWeight={'medium'} fontSize={10} px={2} >Titulo da tarefa</Heading>
+
+
                             </HStack>
                         </Box>
 
@@ -477,10 +481,10 @@ function Home() {
                     </Box>
                 </AspectRatio>
                 <Box position="absolute" bottom={4} left={50}>
-                    <Heading fontWeight={'medium'} fontSize={15} >Criar nova agenda</Heading>
+                    <Heading fontWeight={'medium'} fontSize={15} >Criar Meta</Heading>
                 </Box>
             </TouchableOpacity>
-        </NativeBaseProvider>
+        </NativeBaseProvider >
     )
 }
 export default Home;
