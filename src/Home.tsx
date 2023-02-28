@@ -71,7 +71,7 @@ function Home() {
     return (
         <NativeBaseProvider >
             <AspectRatio w="100%" ratio={17 / 11}>
-                <Image source={{ uri: require('./image/noite.jpg') }} alt="image" borderBottomRadius={4} />
+                <Image source={{ uri: require('./image/dia.jpg') }} alt="image" borderBottomRadius={4} />
             </AspectRatio>
             <Heading fontWeight={'medium'} fontSize={40} style={{ position: 'absolute', top: 158, left: 10, color: 'white' }}>{dia}</Heading>
             <Heading fontWeight={'thin'} fontSize={20} style={{ position: 'absolute', top: 200, left: 10, color: 'white' }}>{semana}</Heading>
@@ -81,11 +81,11 @@ function Home() {
                 <HStack bgColor={'white'}>
                     <FlatList showsHorizontalScrollIndicator={false} shadow="2" px={2} data={data} renderItem={({ item }) =>
 
-                        <Box borderBottomWidth="1" pl={["0", "4"]} pr={["0", "4"]} py="2">
+                        <Box pl={["0", "4"]} pr={["0", "4"]} py="2">
                             <HStack shadow={2} space={[2, 2]} justifyContent="space-between" height={50} borderRadius={4}>
                                 {/* <Avatar size="30px" source={{ uri: item.avatarUrl }} paddingTop={5} /> */}
                                 <Heading fontWeight={'medium'} fontSize={25} px={2} bottom={20} >{item.fullName}</Heading>
-                                <Heading fontWeight={'medium'} fontSize={10} px={2} bottom={20}  >{item.recentText}</Heading>
+                                {/* <Heading fontWeight={'medium'} fontSize={10} px={2} bottom={20}  >{item.recentText}</Heading> */}
                                 <Ionicons name='close' size={30} bottom={20} />
 
 
