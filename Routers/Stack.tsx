@@ -8,13 +8,15 @@ import { TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { authService } from '../services/authService';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import TEste from './../src/TEste';
 const Stack = createStackNavigator();
 const Stacks = () => {
     const { Sair } = authService()
-    console.log('Peimro')
+
     return (
         <NavigationContainer>
             <Stack.Navigator>
+                <Stack.Screen name="TEste" component={TEste} options={{ headerShown: false, }} />
                 <Stack.Screen name="Login" component={Login} options={{ headerShown: false, }} />
                 <Stack.Screen name="Home" component={Home} options={{
                     headerLeft: null, headerTransparent: true, headerMode: 'float', title: '', headerTintColor: 'white',
