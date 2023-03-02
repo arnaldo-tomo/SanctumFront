@@ -1,6 +1,6 @@
 import {
     NativeBaseProvider, Spacer, Heading, Box, Button, StatusBar, HStack, Image, Avatar, AspectRatio,
-    IconButton, Center, VStack, FlatList, ScrollView, Icon, Fab
+    IconButton, Center, VStack, FlatList, ScrollView, Icon, Fab, Input, Stack, Container
 } from 'native-base';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
@@ -53,61 +53,139 @@ function Home() {
         recentText: "Good Day!",
         avatarUrl: "https://miro.medium.com/max/1400/0*0fClPmIScV5pTLoE.jpg"
     }, {
+    }, {
+        id: "58694a0f-3da1-471f-bd96-145571e29d72",
+        fullName: "Anci Barroco",
+        timeStamp: "6:22 PM",
+        recentText: "Good Day!",
+        avatarUrl: "https://miro.medium.com/max/1400/0*0fClPmIScV5pTLoE.jpg"
+    }, {
+    }, {
+        id: "58694a0f-3da1-471f-bd96-145571e29d72",
+        fullName: "Anci Barroco",
+        timeStamp: "6:22 PM",
+        recentText: "Good Day!",
+        avatarUrl: "https://miro.medium.com/max/1400/0*0fClPmIScV5pTLoE.jpg"
+    }, {
+    }, {
+        id: "58694a0f-3da1-471f-bd96-145571e29d72",
+        fullName: "Anci Barroco",
+        timeStamp: "6:22 PM",
+        recentText: "Good Day!",
+        avatarUrl: "https://miro.medium.com/max/1400/0*0fClPmIScV5pTLoE.jpg"
+    }, {
+    }, {
+        id: "58694a0f-3da1-471f-bd96-145571e29d72",
+        fullName: "Anci Barroco",
+        timeStamp: "6:22 PM",
+        recentText: "Good Day!",
+        avatarUrl: "https://miro.medium.com/max/1400/0*0fClPmIScV5pTLoE.jpg"
+    }, {
+    }, {
+        id: "58694a0f-3da1-471f-bd96-145571e29d72",
+        fullName: "Anci Barroco",
+        timeStamp: "6:22 PM",
+        recentText: "Good Day!",
+        avatarUrl: "https://miro.medium.com/max/1400/0*0fClPmIScV5pTLoE.jpg"
+    }, {
+    }, {
+        id: "58694a0f-3da1-471f-bd96-145571e29d72",
+        fullName: "Anci Barroco",
+        timeStamp: "6:22 PM",
+        recentText: "Good Day!",
+        avatarUrl: "https://miro.medium.com/max/1400/0*0fClPmIScV5pTLoE.jpg"
+    }, {
+    }, {
+        id: "58694a0f-3da1-471f-bd96-145571e29d72",
+        fullName: "Anci Barroco",
+        timeStamp: "6:22 PM",
+        recentText: "Good Day!",
+        avatarUrl: "https://miro.medium.com/max/1400/0*0fClPmIScV5pTLoE.jpg"
+    }, {
+    }, {
+        id: "58694a0f-3da1-471f-bd96-145571e29d72",
+        fullName: "Anci Barroco",
+        timeStamp: "6:22 PM",
+        recentText: "Good Day!",
+        avatarUrl: "https://miro.medium.com/max/1400/0*0fClPmIScV5pTLoE.jpg"
+    }, {
         id: "68694a0f-3da1-431f-bd56-142371e29d72",
         fullName: "Aniket Kumar",
         timeStamp: "8:56 PM",
         recentText: "All the best",
         avatarUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSr01zI37DYuR8bMV5exWQBSw28C1v_71CAh8d7GP1mplcmTgQA6Q66Oo--QedAN1B4E1k&usqp=CAU"
-    }, {
-        id: "28694a0f-3da1-471f-bd96-142456e29d72",
-        fullName: "Kiara",
-        timeStamp: "12:47 PM",
-        recentText: "I will call today.",
-        avatarUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBwgu1A5zgPSvfE83nurkuzNEoXs9DMNr8Ww&usqp=CAU"
     }];
 
 
 
     return (
-        <NativeBaseProvider >
-            <AspectRatio w="100%" ratio={17 / 11}>
-                <Image source={{ uri: require('./image/dia.jpg') }} alt="image" borderBottomRadius={4} />
-            </AspectRatio>
-            <Heading fontWeight={'medium'} fontSize={40} style={{ position: 'absolute', top: 158, left: 10, color: 'white' }}>{dia}</Heading>
-            <Heading fontWeight={'thin'} fontSize={20} style={{ position: 'absolute', top: 200, left: 10, color: 'white' }}>{semana}</Heading>
-            <Heading fontWeight={'thin'} fontSize={20} style={{ position: 'absolute', top: 20, left: 10, color: 'white' }}>{usuario}</Heading>
+        // <NativeBaseProvider >
+        //     <AspectRatio w="100%" ratio={17 / 11}>
+        //         <Image source={{ uri: require('./image/dia.jpg') }} alt="image" borderBottomRadius={4} />
+        //     </AspectRatio>
+        //     <Heading fontWeight={'medium'} fontSize={40} style={{ position: 'absolute', top: 158, left: 10, color: 'white' }}>{dia}</Heading>
+        //     <Heading fontWeight={'thin'} fontSize={20} style={{ position: 'absolute', top: 200, left: 10, color: 'white' }}>{semana}</Heading>
+        //     <Heading fontWeight={'thin'} fontSize={20} style={{ position: 'absolute', top: 20, left: 10, color: 'white' }}>{usuario}</Heading>
 
-            <ScrollView>
-                <HStack bgColor={'white'}>
+        //     <ScrollView>
+        //         <HStack bgColor={'white'}>
+        //             <FlatList showsHorizontalScrollIndicator={false} shadow="2" px={2} data={data} renderItem={({ item }) =>
+
+        //                 <Box pl={["0", "4"]} pr={["0", "4"]} py="2">
+        //                     <HStack shadow={2} space={[2, 2]} justifyContent="space-between" height={50} borderRadius={4}>
+        //                         {/* <Avatar size="30px" source={{ uri: item.avatarUrl }} paddingTop={5} /> */}
+        //                         <Heading fontWeight={'medium'} fontSize={25} px={2} bottom={20} >{item.fullName}</Heading>
+        //                         {/* <Heading fontWeight={'medium'} fontSize={10} px={2} bottom={20}  >{item.recentText}</Heading> */}
+        //                         <Ionicons name='close' size={30} bottom={20} />
+
+
+
+        //                     </HStack>
+        //                 </Box>
+
+        //             } keyExtractor={item => item.id} />
+        //         </HStack>
+        //     </ScrollView>
+        //     <TouchableOpacity>
+        //         <AspectRatio w="100%" bgColor={'white'} ratio={80 / 11}>
+        //             <Box style={{ position: 'absolute', backgroundColor: 'white', bottom: 50, color: 'black' }}>
+        //                 <Ionicons name='add' size={50} />
+
+        //             </Box>
+        //         </AspectRatio>
+        //         <Box position="absolute" bottom={4} left={50}>
+        //             <Heading fontWeight={'medium'} fontSize={15} >Criar Meta</Heading>
+        //         </Box>
+        //     </TouchableOpacity>
+        // </NativeBaseProvider >
+
+        <NativeBaseProvider>
+            <HStack pl={4} pr={2}>
+                <Heading pt={5}>Today's Tasks</Heading>
+            </HStack>
+            <ScrollView flex={1} pt={2} >
+                <HStack  >
                     <FlatList showsHorizontalScrollIndicator={false} shadow="2" px={2} data={data} renderItem={({ item }) =>
 
-                        <Box pl={["0", "4"]} pr={["0", "4"]} py="2">
-                            <HStack shadow={2} space={[2, 2]} justifyContent="space-between" height={50} borderRadius={4}>
-                                {/* <Avatar size="30px" source={{ uri: item.avatarUrl }} paddingTop={5} /> */}
-                                <Heading fontWeight={'medium'} fontSize={25} px={2} bottom={20} >{item.fullName}</Heading>
-                                {/* <Heading fontWeight={'medium'} fontSize={10} px={2} bottom={20}  >{item.recentText}</Heading> */}
-                                <Ionicons name='close' size={30} bottom={20} />
-
-
-
+                        <Box pl={2} pr={2} py="2">
+                            <HStack bgColor={'white'} shadow={2} space={[2, 2]} justifyContent="space-between" height={50} borderRadius={4}>
+                                <Heading fontSize={25} fontWeight={50} pl={2} pt={2}>Post</Heading>
                             </HStack>
                         </Box>
 
                     } keyExtractor={item => item.id} />
                 </HStack>
             </ScrollView>
-            <TouchableOpacity>
-                <AspectRatio w="100%" bgColor={'white'} ratio={80 / 11}>
-                    <Box style={{ position: 'absolute', backgroundColor: 'white', bottom: 50, color: 'black' }}>
-                        <Ionicons name='add' size={50} />
-
-                    </Box>
-                </AspectRatio>
-                <Box position="absolute" bottom={4} left={50}>
-                    <Heading fontWeight={'medium'} fontSize={15} >Criar Meta</Heading>
-                </Box>
+            <Stack position={'absolute'} bottom={4} maxW="300px" mx="auto">
+                <Input left={4} width={250} height={50} bgColor={'white'} variant="rounded" placeholder="Write your's Task Here" />
+            </Stack>
+            <TouchableOpacity >
+                <Fab bgColor={'white'} renderInPortal={true} shadow={2} size="sm" icon={<Icon color="black" as={AntDesign} name="plus" size="sm" />} />
             </TouchableOpacity>
-        </NativeBaseProvider >
+
+
+
+        </NativeBaseProvider>
     )
 }
 export default Home;
