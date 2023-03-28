@@ -15,6 +15,7 @@ function Home() {
     const currentDate = new Date();
     const currentDayOfWeek = daysOfWeek[currentDate.getDay()];
     const currentDae = new Date().toLocaleDateString();
+    const [estado, seestado] = useState(2);
 
     const [usuario, setnome] = useState();
     const dia = currentDayOfWeek;
@@ -158,10 +159,10 @@ function Home() {
         //         </Box>
         //     </TouchableOpacity>
         // </NativeBaseProvider >
-
         <NativeBaseProvider>
             <HStack pl={4} pr={2}>
-                <Heading pt={5}>Today's Tasks</Heading>
+                {(estado ===> 18) ? (<Heading pt={5}>Dia's Tasks</Heading>) : (<Heading pt={5}>Noite's Tasks</Heading>)}
+                {/* <Heading pt={5}>Today's Tasks</Heading> */}
             </HStack>
             <ScrollView flex={1} pt={2} >
                 <HStack  >
